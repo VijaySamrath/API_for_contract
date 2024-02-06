@@ -9,13 +9,16 @@ const hre = require("hardhat");
 async function main() {
  
 
-  const myContract = await hre.ethers.deployContract("MyContract");
+  const initialOwner = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 
-  await myContract.waitForDeployment();
+  const testToken = await hre.ethers.deployContract("TestToken", [initialOwner]);
 
-  console.log("myContract deployed to:", myContract.target
+  await testToken.waitForDeployment();
+
+  console.log("myContract deployed to:", testToken.target
   );
 }
+
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
